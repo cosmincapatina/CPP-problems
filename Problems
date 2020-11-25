@@ -1,0 +1,45 @@
+Q: Return the biggest sum from a submatrix in a given matrix
+#include <iostream>
+using namespace std;
+int main(void){
+    int mat[51][51], linii, coloane, sp[51][51], sum, aux;
+    
+    cin >> linii >> coloane;
+    // Add elements to the matrix
+    for (int i = 1; i <= linii; i++){
+        for (int j = 1; j <= coloane; j++){  
+            cin >> mat[i][j];
+            sp[i][j] = mat[i][j] + sp[i-1][j] + sp[i][j-1] - sp[i-1][j-1];
+        }
+    }
+    // Calculate all the submatrices sum and save it to sum.
+    for (int i = 1; i <= linii; i++){
+        for (int j = 1; j <= coloane; j++){
+            for (int q = i; q <= linii; q++){
+                for(int r = j; r <= coloane; r++){
+                    aux = sp[q][r] - sp[i-1][r] - sp[q][j-1] + sp[i-1][j-1];
+                    if (sum <= aux){
+                    sum = aux;
+                    }
+                }
+            }
+        }
+    }
+    // Check which number is the biggest in the matrix in case of negative numbers
+    aux = mat[1][1];
+    for (int i = 1; i <= linii; i++){
+        for (int j = 1; j <= coloane; j++){
+            if (mat[i][j] > aux){
+                aux = mat[i][j];
+            }
+        }
+    }
+    // If the number is negative return aux
+    // else return sum
+    if ( aux >= 0 ){
+        cout << sum;
+    }else{
+        cout << aux;
+    }
+
+}
