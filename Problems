@@ -2,7 +2,7 @@ Q: Return the biggest sum from a submatrix in a given matrix
 #include <iostream>
 using namespace std;
 int main(void){
-    int mat[51][51], linii, coloane, sp[51][51], sum, aux;
+    int mat[51][51], linii, coloane, sp[51][51], sum= -3001, aux;
     
     cin >> linii >> coloane;
     // Add elements to the matrix
