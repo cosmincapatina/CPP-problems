@@ -1,3 +1,97 @@
+Q: Se citeste o matrice de 9x9 si se verifica daca respecta regulile jocului Sudoku
+#include <iostream>
+using namespace std;
+int main(void){
+    int mat[10][10], vec[10], i = 1, j = 1, q = 1, notOk = 0, counter = 1, counter2 = 1, counter3 = 3, counter4 = 3, a = 1, b = 1, counter5 = 1, counter6 = 1, sortat = 0, aux, p = 1, o = 1;
+    for (i = 1; i < 10; i++)
+    {
+        for (j = 1; j < 10; j++)
+        {
+            cin >> mat[i][j];
+        }
+    }
+    
+    while (counter <= 9)
+    {
+        // Verificam fiecare patratel de 3 pe 3 din patrice
+        counter2 = 1;
+        for(a = counter5; a <= counter4; a++)
+        {
+            for(b = counter6; b <= counter3; b++)
+            {
+                vec[counter2] = mat[a][b];
+                counter2++;
+            }
+        }
+        // Sortam vectorul
+        sortat = 0;
+        while(sortat == 0)
+        {
+            sortat = 1;
+            for(o = 1; o < 9; o++)
+            {
+                if (vec[o] > vec[o+1])
+                {
+                    sortat = 0;
+                    aux = vec[o];
+                    vec[o] = vec[o+1];
+                    vec[o+1] = aux;
+                }
+            }
+        }
+        // Verificam daca respecta regulile sudoku in patratelul 3 pe 3
+        for (p = 1; p < 10; p++)
+        {
+            if (vec[p] != p)
+            {
+                notOk = 1;
+            }
+        }
+
+        if (counter % 3 == 0)
+        {
+            counter4 += 3;
+            counter5 += 3;
+        }
+        counter6 += 3;
+        counter3 += 3;
+        if (b == 10)
+        {
+            counter6 = 1;
+            counter3 = 3;
+        }
+        counter++;
+    }
+    
+    // Verificam daca fiecare linie si coloana respecta regulile sudoku
+    for (i = 1; i < 10; i++)
+    {
+        for (j = 1; j < 10; j++)
+        {
+            for (q = 1; q < 10; q++)
+            {
+
+                if (mat[i][j] == mat[q][j] && q != i)
+                {
+                    notOk = 1;
+                }
+
+                if (mat[i][j] == mat[i][q] && q != j)
+                {
+                    notOk = 1;
+                }
+            }
+
+        }
+    }
+    
+    if (notOk == 1)
+        cout << "incorect";
+    else
+        cout << "corect";
+}
+
+
 Q: Se citesc de la tastatura N si M. De pe urmatoarele linii se citesc M numere naturale, reprezentand elementele matricei.
 Programul va afisa DA in cazul in care Max poate parcurge in spirala toate elementele matricei, iar NU in caz contrar.
 Max se poate deplasa din casuta in care se afla fie spre stanga, fie spre dreapta, fie in sus sau in jos.
